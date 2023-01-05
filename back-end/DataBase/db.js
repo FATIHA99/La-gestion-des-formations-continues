@@ -4,8 +4,8 @@ dotenv.config();
 mongoose.set('strictQuery', false);
 module.exports = mongoose.connect(process.env.DATABASE)
     .then(() => {
-        console.log('DATABASE CONNECTED')
+        console.log('DATABASE CONNECTED');
     })
-    .catch(() => {
-        console.log('DATABASE NOT CONNECTED')
+    .catch((er) => {
+        console.log(er)
     })
