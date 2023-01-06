@@ -7,7 +7,8 @@ function Login() {
   return (
     <div className="align">
   
-      <h3 className="text-light ">Login Here</h3>
+      {/* <h3 className="text-light ">Login Here</h3> */}
+      <img  className="logo-login" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjGk-jm8w8TnBmkvCuRyJSNYMk-Z9YYmMwQw&usqp=CAU'></img>
       <div className="grid">
         <form action="" method="POST" className="form login">
           <div className="form__field">

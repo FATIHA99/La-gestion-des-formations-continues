@@ -55,17 +55,21 @@
 }
 
 /* layout/base.css */
-
+.logo-login{
+    width : 200px;
+    margin-bottom: 20px;
+}
 :root {
     --htmlFontSize: 100%;
-
-    --bodyBackgroundColor: #2c3338;
+    background: rgb(11,52,145);
+    background: linear-gradient(324deg, rgba(11,52,145,1) 34%, rgba(44,51,56,1) 35%);
+    /* --bodyBackgroundColor: #2c3338; */
     --bodyColor: var(--baseColor);
     --bodyFontFamily: "Open Sans";
     --bodyFontFamilyFallback: sans-serif;
     --bodyFontSize: 0.875rem;
     --bodyFontWeight: 400;
-    --bodyLineHeight: 1.5;
+    --bodyLineHeight: 2.5;
    
 }
 
@@ -157,9 +161,9 @@ input[type="submit"] {
 
     --loginLabelBackgroundColor: #363b41;
 
-    --loginSubmitBackgroundColor: #ea4c88;
+    --loginSubmitBackgroundColor: #595FF7;
     --loginSubmitColor: #eee;
-    --loginSubmitHoverBackgroundColor: #d44179;
+    --loginSubmitHoverBackgroundColor: #595FF7;
 }
 
 .login {
