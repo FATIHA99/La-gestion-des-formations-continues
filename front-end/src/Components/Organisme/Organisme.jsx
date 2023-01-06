@@ -1,6 +1,6 @@
 import React from "react";
-import Input from "../Input";
 import ListOrganisme from "./List-Organisme";
+
 
 import Modal from './Modal-Add-Organisme'
 
@@ -29,7 +29,7 @@ function Organisme() {
 
 
 
- <Modal/>
+                <Modal />
 
                 {/* <form className="m-4 border border-secondary-subtle  ">
                     <div className=" d-flex ">
@@ -41,7 +41,7 @@ function Organisme() {
                     
                 </form> */}
             </div>
-            <ListOrganisme/>
+            <ListOrganisme />
 
         </div>
     )

@@ -1,5 +1,4 @@
 import React from "react";
-
 import '../css/Style.css'
 function ListOrganisme() {
 
@@ -7,27 +6,7 @@ function ListOrganisme() {
 
         <div className="container ">
 
-            {/* <table class="table table-responsive">
-                <thead>
-                    <tr>
-                        <th scope="col">titre</th>
-                        <th scope="col">compus</th>
-                        <th scope="col">action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                  
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td><button type="button" class="btn btn-success">modifier</button>  <button type="button" class="btn btn-danger">Danger</button></td>
-                   
-                    </tr>
-              
-                </tbody>
-            </table> */}
-
-
+    
             <table class="container">
                 <thead>
                     <tr>
@@ -47,8 +26,6 @@ function ListOrganisme() {
 
                     </tr>
                     <tr>
-                       
-
                     </tr>
 
                 </tbody>

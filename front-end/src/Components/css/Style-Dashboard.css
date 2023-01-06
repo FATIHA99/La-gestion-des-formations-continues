@@ -10,9 +10,12 @@ body {
     color: white;
     font-size: 1.8em;
     margin: 40px auto 66px;
-    width: 118px;
+    width: 18px;
     font-weight: bold;
     animation-name: InfoUser;
+}
+.logo-img{
+    width:100px;
 }
 
 * {
