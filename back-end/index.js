@@ -7,12 +7,14 @@ const Route_Formation = require('./routes/Formation-Route')
 const cookieParser = require('cookie-parser');
 const DATABASE = require('./DataBase/db')
 require('dotenv').config()
+const GlobalError = require('./middlewares/GlobalError')
 
 const app = express();
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({extended : false}))
 app.use(cors())
+app.use(GlobalError)
 app.use('/auth',Route_Auth)
 app.use('/organisme',Route_Organisme)
 app.use('/formation',Route_Formation)

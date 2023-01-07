@@ -3,23 +3,28 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const cookie = require('cookie-parser')
 const { verificationAccount } = require('../tools/nodemailer/verification-compte.js')
-
+const HandleError =require('../tools/Error-Handling')
 
 function Login(req, res) {
     const { body } = req
     User.findOne({ email: body.email })
         .then((e) => {
             if (e) {
-                // console.log(e)
                 const passwordHash = bcrypt.compareSync(body.password, e.password)
                 if (!passwordHash) {
                     res.json('password wrong')
                 }
                 else {
-                    const data = e.data;
-                    const token = jwt.sign({ info: data }, process.env.SECRET_WORD)
-                    const test = res.cookie('token', token)
-                    res.json(test)
+                    if (e.confirmed) {
+                        const data = e;
+                        const token = jwt.sign({ data }, process.env.SECRET_WORD)
+                        // const test = cookie('token', token)
+                        res.json('login sucess'+token)
+                    }
+                    else {
+                        res.json({ alert: 'confirm your account' })
+                    }
+
                 }
             }
             else {
@@ -51,10 +56,8 @@ function Register(req, res) {
             else {
                 User.create({ ...body })
                     .then((e) => {
-                        // cookie('email', e.email)
                         verificationAccount(e.email);
-                        console.log(e.email)
-                        res.json({ response: e.email })
+                        res.json({ response: e.email + 'creation sucessfully ' })
                     })
                     .catch()
             }
@@ -63,14 +66,12 @@ function Register(req, res) {
 
 
 function Confirmation(req, res) {
-    const {token} = req.params
-    const tkn = jwt.verify(token,process.env.SECRET_WORD)
-    //  res.json({ tkn })
-    req.data=tkn
-    // res.json({email : res.data.email})
-     User.findOneAndUpdate({ email: req.data.email }, {confirmed: true})
-         .then((e) => {
-             res.json({ message: 'the account is verified ' })
-         })
+    const { token } = req.params
+    const tkn = jwt.verify(token, process.env.SECRET_WORD)
+    req.data = tkn
+    User.findOneAndUpdate({ email: req.data.email }, { confirmed: true })
+        .then((e) => {
+            res.json({ message: 'the account is verified ' })
+        })
 }
 module.exports = { Login, Register, Confirmation }
