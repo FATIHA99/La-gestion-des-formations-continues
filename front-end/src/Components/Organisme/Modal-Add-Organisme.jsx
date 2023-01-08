@@ -25,11 +25,11 @@ function Example() {
                 handleClose()
             })
     }
-    
+
     return (
-        
+
         <>
-            
+
             <Button variant="secondary border-0 m-3" onClick={handleShow} style={{ backgroundColor: "#323C50" }}>
                 Add organisme
             </Button>
@@ -63,7 +63,7 @@ function Example() {
                                 autoFocus
 
                             />
-                           
+
                         </Form.Group>
                     </Form>
                 </Modal.Body>

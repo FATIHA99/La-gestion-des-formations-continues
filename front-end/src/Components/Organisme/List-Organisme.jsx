@@ -3,12 +3,9 @@ import '../css/Style.css'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
 import END_POINT from '../../config'
-
-
-
 import 'react-toastify/dist/ReactToastify.css';
 
-
+import UpdateModal from './Modal-Update-Organisme'
 
 function ListOrganisme() {
     // to dispaly  data 
@@ -16,7 +13,7 @@ function ListOrganisme() {
     async function DisplayOrganisme() {
         const organismeData = await axios.get(`${END_POINT}/organisme/display`)
         setOrganisme(organismeData.data)
-        console.log(organismeData.data)
+      
     }
     useEffect(() => {
         DisplayOrganisme()
@@ -51,7 +48,7 @@ function ListOrganisme() {
                             <td>{org.label}</td>
                             <td>{org.compus}</td>
                             <td> <button  onClick={(e)=>{deleteOrganisme(e,org._id)}} className="btn btn-outline-danger" > <i className="bi bi-trash"></i></button> </td>
-                            <td> <button  className="btn  btn-outline-info"  ><i className="bi bi-pencil-square"></i> </button> </td>
+                            <td><UpdateModal id={org._id}/> </td>
 
                         </tr>
                     ))}
