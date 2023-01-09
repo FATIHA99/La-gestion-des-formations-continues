@@ -14,7 +14,6 @@ function Example(props) {
     const handleShow = () => setShow(true);
 
     const [oneOrganisme, setOrganisme] = useState({ label: '', compus: '' });
- 
 
     const getOne = async (e, id) => {
         e.preventDefault()
@@ -25,18 +24,19 @@ function Example(props) {
     }
 
     const updateOrganisme = (e, id) => {
-        axios.put(`${END_POINT}/organisme/update/${id}`,oneOrganisme)
+        axios.put(`${END_POINT}/organisme/update/${id}`, oneOrganisme)
             .then((e) => {
                 toast.success('organisme updated ')
                 handleClose();
             })
     }
- 
+
 
 
     return (
 
         <>
+               <ToastContainer autoClose={200} />
             <button onClick={(e) => { getOne(e, props.id) }} className="btn  btn-outline-info"  ><i className="bi bi-pencil-square"></i> </button>
 
             <Modal show={show} onHide={handleClose} >
@@ -83,7 +83,7 @@ function Example(props) {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <ToastContainer />
+      
         </>
     );
 }

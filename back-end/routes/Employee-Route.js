@@ -1,6 +1,7 @@
 const Router = require('express').Router();
 const Controller = require('../Controllers/Employee-Controller')
 
-Router.post('/add', Controller.AjouterEmpolyee)
+Router.get('/display', Controller.DisplayEmployee)
+Router.put('/edit/:id', Controller.UpdateEmployee)
 
 module.exports = Router

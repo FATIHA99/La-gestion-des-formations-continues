@@ -2,9 +2,15 @@ const Formation = require("../models/formation")
 
 async function AjouterFormation(req, res) {
     const { body } = req
-    await Formation.create({ ...body })
-        .then((e) => { res.send('FORMATION ADDED') })
-        .catch((error) => { res.send(error) })
+    if (body.start_date > body.end_date) {
+        res.json({ message: 'the end date should be greater than the start date ' })
+    }
+    else {
+        await Formation.create({ ...body })
+            .then((e) => { res.json({ message: 'formation added' }) })
+            .catch((error) => { res.send(error) })
+    }
+
 }
 
 function DisplayFormation(req, res) {
@@ -34,7 +40,7 @@ function UpdateFormation(req, res) {
 
     Formation.findById(id)
         .then((e) => {
-            Formation.updateOne({ _id: id }, { label: newlabel, description:newdescription })
+            Formation.updateOne({ _id: id }, { label: newlabel, description: newdescription })
                 .then((e) => {
                     res.json('FORMATION UPDATED')
                 })
@@ -43,4 +49,4 @@ function UpdateFormation(req, res) {
 }
 
 
-module.exports = { AjouterFormation, DisplayFormation, DeleteFormation, GetOneFormation,UpdateFormation }
+module.exports = { AjouterFormation, DisplayFormation, DeleteFormation, GetOneFormation, UpdateFormation }

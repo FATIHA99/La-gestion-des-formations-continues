@@ -1,29 +1,64 @@
+import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import END_POINT from "../../config";
 import '../css/Login.css'
 
 function Login() {
 
+  const navigate = useNavigate()
+  const [userInfo, setInfo] = useState()
+  function handleInput(e) {
+    setInfo({ ...userInfo, [e.target.name]: e.target.value })
+  }
+
+  function handleForm(e) {
+    e.preventDefault()
+    axios.post(`${END_POINT}/auth/login`, userInfo)
+      .then((e) => {
+        if (e.data.response == 'login sucess') {
+          navigate('/dashboard')
+        }
+        else {
+          toast.warning(e.data.response)
+        }
+
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+
   return (
     <div className="align">
-  
+      <ToastContainer autoClose={200}/>
       {/* <h3 className="text-light ">Login Here</h3> */}
-      <img  className="logo-login" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjGk-jm8w8TnBmkvCuRyJSNYMk-Z9YYmMwQw&usqp=CAU'></img>
+      <img className="logo-login" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjGk-jm8w8TnBmkvCuRyJSNYMk-Z9YYmMwQw&usqp=CAU'></img>
       <div className="grid">
-        <form action="" method="POST" className="form login">
+        <form onSubmit={handleForm} action="" method="POST" className="form login">
           <div className="form__field">
             <label htmlFor="login__username"><svg className="icon">
               <use xlinkHref="#icon-user" />
-            </svg><span className="hidden">Username</span></label>
-            <input autoComplete="username" id="login__username" type="text" name="username" className="form__input" placeholder="Username" required />
+            </svg><span className="hidden">Email </span></label>
+
+            {/* email */}
+            <input onChange={handleInput} autoComplete="username" id="login__username" type="email" name="email" className="form__input" placeholder="Username" required />
+
           </div>
           <div className="form__field">
             <label htmlFor="login__password"><svg className="icon">
               <use xlinkHref="#icon-lock" />
             </svg><span className="hidden">Password</span></label>
-            <input id="login__password" type="password" name="password" className="form__input" placeholder="Password" required />
+            {/* password */}
+
+            <input onChange={handleInput} id="login__password" type="password" name="password" className="form__input" placeholder="Password" required />
+
+
           </div>
           <div className="form__field">
+
             <input type="submit" defaultValue="Sign In" />
           </div>
         </form>

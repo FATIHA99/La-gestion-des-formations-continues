@@ -29,7 +29,7 @@ function Example() {
     return (
 
         <>
-
+       <ToastContainer autoClose={200} />
             <Button variant="secondary border-0 m-3" onClick={handleShow} style={{ backgroundColor: "#323C50" }}>
                 Add organisme
             </Button>
@@ -76,7 +76,7 @@ function Example() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            <ToastContainer />
+         
         </>
     );
 }

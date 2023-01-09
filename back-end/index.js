@@ -3,7 +3,7 @@ const cors = require('cors')
 const Route_Auth = require('./routes/auth')
 const Route_Organisme = require('./routes/Organisme-Route')
 const Route_Formation = require('./routes/Formation-Route')
-// const Route_Employee = require('./routes/Employee-Route')
+const Route_Employee = require('./routes/Employee-Route')
 const cookieParser = require('cookie-parser');
 const DATABASE = require('./DataBase/db')
 require('dotenv').config()
@@ -18,7 +18,7 @@ app.use(GlobalError)
 app.use('/auth',Route_Auth)
 app.use('/organisme',Route_Organisme)
 app.use('/formation',Route_Formation)
-// app.use('/employee',Route_Employee)
+app.use('/employee',Route_Employee)
 
 
 

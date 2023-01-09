@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const cookie = require('cookie-parser')
 const { verificationAccount } = require('../tools/nodemailer/verification-compte.js')
-const HandleError =require('../tools/Error-Handling')
+const HandleError = require('../tools/Error-Handling')
 
 function Login(req, res) {
     const { body } = req
@@ -12,28 +12,29 @@ function Login(req, res) {
             if (e) {
                 const passwordHash = bcrypt.compareSync(body.password, e.password)
                 if (!passwordHash) {
-                    res.json('password wrong')
+                    res.json({ response: 'password wrong' })
+                }
+                else if (!e.confirmed) {
+                    res.json({ response: 'confirm your account' })
                 }
                 else {
-                    if (e.confirmed) {
-                        const data = e;
-                        const token = jwt.sign({ data }, process.env.SECRET_WORD)
-                        // const test = cookie('token', token)
-                        res.json('login sucess'+token)
-                    }
-                    else {
-                        res.json({ alert: 'confirm your account' })
-                    }
 
+                    const data = e;
+                    const token = jwt.sign({ data }, process.env.SECRET_WORD)
+                    // const test = cookie('token', token)
+                    res.json({
+                        response: 'login sucess',
+                        token: token
+                    })
                 }
             }
             else {
                 if (!body.email || !body.password) {
 
-                    res.json({ message: 'remplir les champs' })
+                    res.json({ response: 'remplir les champs' })
                 }
                 else {
-                    res.json({ message: 'user not found ' })
+                    res.json({ response: 'user not found ' })
                 }
 
             }
@@ -57,7 +58,7 @@ function Register(req, res) {
                 User.create({ ...body })
                     .then((e) => {
                         verificationAccount(e.email);
-                        res.json({ response: e.email + 'creation sucessfully ' })
+                        res.json({ response:'creation sucessfully' })
                     })
                     .catch()
             }
@@ -71,7 +72,7 @@ function Confirmation(req, res) {
     req.data = tkn
     User.findOneAndUpdate({ email: req.data.email }, { confirmed: true })
         .then((e) => {
-            res.json({ message: 'the account is verified ' })
+            res.redirect('http://localhost:3000/')
         })
 }
 module.exports = { Login, Register, Confirmation }

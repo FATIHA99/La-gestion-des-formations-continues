@@ -31,6 +31,7 @@ function UpdateOrganisme(req, res) {
     const newlabel = req.body.label
     const newcompus = req.body.compus
     const newphone = req.body.phone
+    
     Organisme.findById(id)
         .then((e) => {
             Organisme.updateOne({ _id: id }, { label: newlabel, compus: newcompus, phone: newphone })

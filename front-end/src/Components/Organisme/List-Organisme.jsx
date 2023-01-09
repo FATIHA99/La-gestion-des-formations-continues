@@ -13,25 +13,25 @@ function ListOrganisme() {
     async function DisplayOrganisme() {
         const organismeData = await axios.get(`${END_POINT}/organisme/display`)
         setOrganisme(organismeData.data)
-      
+
     }
     useEffect(() => {
         DisplayOrganisme()
-    }, [])
+    }, [organisme])
     // to delete organisme 
 
-  const deleteOrganisme=(e,id)=>{
-    e.preventDefault();
-    axios.delete(`${END_POINT}/organisme/delete/${id}`)
-    .then((e)=>{
-        toast.success('organisme deleted')
-    })
-  }
+    const deleteOrganisme = (e, id) => {
+        e.preventDefault();
+        axios.delete(`${END_POINT}/organisme/delete/${id}`)
+            .then((e) => {
+                toast.success('organisme deleted')
+            })
+    }
 
     return (
 
         <div className="container ">
-
+            <ToastContainer autoClose={200} />
 
             <table class="container">
                 <thead>
@@ -47,8 +47,8 @@ function ListOrganisme() {
                         <tr key={org._id}>
                             <td>{org.label}</td>
                             <td>{org.compus}</td>
-                            <td> <button  onClick={(e)=>{deleteOrganisme(e,org._id)}} className="btn btn-outline-danger" > <i className="bi bi-trash"></i></button> </td>
-                            <td><UpdateModal id={org._id}/> </td>
+                            <td> <button onClick={(e) => { deleteOrganisme(e, org._id) }} className="btn btn-outline-danger" > <i className="bi bi-trash"></i></button> </td>
+                            <td><UpdateModal id={org._id} /> </td>
 
                         </tr>
                     ))}

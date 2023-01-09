@@ -1,38 +1,73 @@
-import React from "react";
+import React,{useState} from "react";
 import '../css/Login.css'
-import {Link} from 'react-router-dom'
+import { Link ,useNavigate } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { toast, ToastContainer } from "react-toastify";
+import END_POINT from "../../config";
+import axios from "axios";
+
 
 function Register() {
+ 
+  const navigate = useNavigate()
+  const [userInfo, setInfo] = useState()
+  function handleInput(e) {
+    setInfo({ ...userInfo, [e.target.name]: e.target.value })
+  }
+
+  function handleForm(e) {
+    e.preventDefault()
+    axios.post(`${END_POINT}/auth/register`, userInfo)
+      .then((e) => {
+        if (e.data.response == 'creation sucessfully') {
+          navigate('/')
+        }
+        else {
+          toast.warning(e.data.response)
+        }
+
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+
 
   return (
     <div className="align">
+
+      <ToastContainer autoClose={200}/>
       {/* <h3 className="text-light ">Register Here</h3> */}
-      <img  className="logo-login" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjGk-jm8w8TnBmkvCuRyJSNYMk-Z9YYmMwQw&usqp=CAU'></img>
+      <img className="logo-login" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjGk-jm8w8TnBmkvCuRyJSNYMk-Z9YYmMwQw&usqp=CAU'></img>
 
       <div className="grid">
-        <form action="" method="POST" className="form login">
+        <form onSubmit={handleForm} action="" method="POST" className="form login">
           <div className="form__field">
             <label htmlFor="login__username"><svg className="icon">
               <use xlinkHref="#icon-user" />
             </svg><span className="hidden">Username</span></label>
-            <input autoComplete="username" id="login__username" type="text" name="username" className="form__input" placeholder="Username" required />
+
+            {/* user name */}
+            <input  onChange={handleInput} autoComplete="username" id="login__username" type="text" name="username" className="form__input" placeholder="Username" required />
           </div>
 
           <div className="form__field">
             <label htmlFor="login__username"><svg className="icon">
               <use xlinkHref="#icon-user" />
-            </svg><span className="hidden">Username</span></label>
-            <input autoComplete="email" id="login__email" type="text" name="email" className="form__input" placeholder="exemple@email.com" required />
-          </div>  
+            </svg><span className="hidden">Email</span></label>
+            {/* email */}
+            <input  onChange={handleInput}  autoComplete="email" id="login__email" type="email" name="email" className="form__input" placeholder="exemple@email.com" required />
+          </div>
 
 
-        
+
           <div className="form__field">
             <label htmlFor="login__password"><svg className="icon">
               <use xlinkHref="#icon-lock" />
             </svg><span className="hidden">Password</span></label>
-            <input id="login__password" type="password" name="password" className="form__input" placeholder="Password" required />
+            
+            {/* password */}
+            <input onChange={handleInput}   id="login__password" type="password" name="password" className="form__input" placeholder="Password" required />
           </div>
 
 

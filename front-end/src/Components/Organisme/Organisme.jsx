@@ -26,20 +26,8 @@ function Organisme() {
         <div className="  ">
             <div className="">
                 <h1 className="text-center mt-5 text-light "> Organisme Form</h1>
-
-
-
                 <Modal />
 
-                {/* <form className="m-4 border border-secondary-subtle  ">
-                    <div className=" d-flex ">
-                    {
-                        inputs.map((i) => (<Input type={i.text} name={i.name} label={i.label} placeholder={i.placeholder} />))
-                    }<button type="submit" className="btn btn-primary w-25 m-5" >Ajouter</button>
-                     </div>
-                      <div className=" d-flex  justify-content-center"></div>
-                    
-                </form> */}
             </div>
             <ListOrganisme />
 

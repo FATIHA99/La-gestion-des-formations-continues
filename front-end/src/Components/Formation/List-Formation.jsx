@@ -1,15 +1,36 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import END_POINT from "../../config";
+import axios from 'axios'
 import '../css/Style.css'
+import { ToastContainer, toast } from 'react-toastify'
+import UpdateModal from './Modal-Update-Formation'
+
+// import { useEffect, useState } from "react";
 function ListFormation() {
+    // to dispaly  data 
+    const [formation, setFormation] = useState([])
+    async function DisplayFormation() {
+        const formationData = await axios.get(`${END_POINT}/formation/display`)
+        setFormation(formationData.data)
+
+    }
+    useEffect(() => {
+        DisplayFormation()
+    }, [formation])
+    // to delete organisme 
+
+    const deleteFormation = (e, id) => {
+        e.preventDefault();
+        axios.delete(`${END_POINT}/formation/delete/${id}`)
+            .then((e) => {
+                toast.success('formation deleted')
+            })
+    }
 
     return (
 
         <div className="container ">
-
-           
-
-
+            <ToastContainer  autoClose={200}/>
             <table class="container">
                 <thead>
                     <tr>
@@ -24,21 +45,18 @@ function ListFormation() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>img</td>
-                        <td>JS</td>
-                        <td>Google BLA BLA</td>
-                        <td>2021</td>
-                        <td>2033</td>
-                        <td> <button className="btn btn-outline-danger" > <i className="bi bi-trash"></i></button> </td>
-                        <td> <button className="btn  btn-outline-info"  ><i className="bi bi-pencil-square"></i> </button> </td>
+                    {formation.map((f) => (
+                        <tr key={f._id}>
+                            <td>img</td>
+                            <td>{f.label}</td>
+                            <td>{f.description}</td>
+                            <td>{f.start_date}</td>
+                            <td>{f.end_date}</td>
+                            <td> <button className="btn btn-outline-danger" onClick={(e) => { deleteFormation(e, f._id) }} > <i className="bi bi-trash"></i></button> </td>
+                            <td><UpdateModal id={f._id}/> </td>
+                        </tr>
 
-                    </tr>
-                    <tr>
-                       
-
-                    </tr>
-
+                    ))}
                 </tbody>
             </table>
         </div>
