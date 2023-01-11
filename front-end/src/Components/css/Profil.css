@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --border-radius-big: #1e2327  1rem;
+     --border-radius-small: .3rem;
+      --green-primary: #1F2739;
+ --box-shadow: 14px 26px 55px -19px rgba(0, 0, 0, 0.61);
+   --dark-grey: #BDC5CD;
+   /*    --green-secondary: #575c58;
+     --light-grey: #E8E8E8;
+   
+    --font-dark: #000;
+    --font-light: #666666 --font-white: #fff; */
+}
+
+*,
+*::after,
+*::before {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: transparent;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+}
+
+body {
+    background: var(--light-grey) !important;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+}
+
+.tour_btn {
+    position: fixed;
+    top: 2%;
+    left: 10%;
+    padding: .5rem 1rem;
+    cursor: pointer;
+    border-radius: var(--border-radius-small);
+    background: gray;
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: 600;
+    z-index: 99;
+}
+
+.phone {
+    height: 100vh;
+    min-width: 400px;
+    width: 400px;
+    border-radius: var(--border-radius-big);
+    overflow: hidden;
+    background: #fff;
+    box-shadow: var(--box-shadow);
+    position: relative;
+}
+
+
+
+
+
+
+
+.user_header {
+    padding: 2.5rem 1rem 7rem;
+    background: var(--green-primary);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.user_titel {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    color: rgb(248, 244, 244);
+}
+
+.user_titel span {
+    cursor: pointer;
+}
+
+.user_image {
+    position: absolute;
+    bottom: -5rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    height: 10rem;
+    width: 10rem;
+    background: #fff;
+    box-shadow: var(--box-shadow);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.user_image img {
+    width: 100%;
+    height: 100%;
+    padding: .3rem;
+    border-radius: 50%;
+}
+
+.user_main {
+    display: flex;
+    justify-content: center;
+    padding-top: 6rem;
+    text-align: center;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: .3rem .5rem 4rem;
+    position: relative;
+}
+
+.post_card {
+    text-align: left;
+    width: 80%;
+    margin: 1rem auto;
+    padding: 1rem .7rem;
+    position: relative;
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius-big);
+
+}
+
+
+.subject {
+    font-weight: 600;
+}
+
+.description {
+    font-size: .9rem;
+    line-height: 1.4;
+}
+
+.action {
+    margin-top: .5rem;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+
+}
+
+.action span {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    padding: .5rem;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+    background: var(--green-secondary);
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1rem;
+    padding: 1rem .5rem;
+}
+
+.gallery_image {
+    height: 150px;
+    width: 150px;
+    background: #000;
+    position: relative;
+
+}
+
+.gallery_image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius-small);
+    box-shadow: var(--box-shadow);
+}
+
+.gallery_image img:hover {
+    transform: scale(1.1)
+}
+
+
+
+
+.tablinks {
+    width: 20%;
+    padding: .5rem 0;
+    cursor: pointer;
+    background: none;
+    color: var(--font-dark);
+    font-weight: 700;
+    border: none;
+    font-size: 1.1rem;
+}
+
+
+@media only screen and (max-width: 400px) {
+    body {
+        transform: scale(.5);
+    }
+}

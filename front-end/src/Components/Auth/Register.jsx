@@ -17,19 +17,13 @@ function Register() {
 
   function handleForm(e) {
     e.preventDefault()
+  
     axios.post(`${END_POINT}/auth/register`, userInfo)
       .then((e) => {
-        if (e.data.response == 'creation sucessfully') {
-          navigate('/')
-        }
-        else {
-          toast.warning(e.data.response)
-        }
-
+        if (e.data.response == 'creation sucessfully') { navigate('/')}
+        else {toast.warning(e.data.response)}
       })
-      .catch((e) => {
-        console.log(e)
-      })
+      .catch((e) => { console.log(e) })
   }
 
 

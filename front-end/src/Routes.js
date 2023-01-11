@@ -7,28 +7,43 @@ import Sidebar from './Components/Side-bar'
 import Login from './Components/Auth/Login'
 import Register from './Components/Auth/Register'
 import ListEmployee from './Components/Employee/Employee'
-
+import Profil from './Components/Profil'
+import NotFound from './Components/Auth/NotFound'
+import EmployeeRoutes from './Components/employeeRoutes'
+import AdminRoutes from './Components/adminRoutes'
 
 
 const Routs = () => {
 
     return (
-      
-            <Routes>
+
+        <Routes>
+            <Route element={<AdminRoutes />}>
                 <Route element={<Sidebar />}>
 
-                    <Route path='/organisme' element={<Organisme />} />
                     <Route path='/dashboard' element={<Dashboard />} />
                     <Route path='/formation' element={<Formation />} />
-                    <Route path='/employee' element={<ListEmployee/>} />
-
+                    <Route path='/organisme' element={<Organisme />} />
+                    <Route path='/employee' element={<ListEmployee />} />
                 </Route>
-                <Route path='/' element={<Login/>} />
-                <Route path='/register' element={<Register/>} />
-                
- 
-            </Routes>
-    
+
+            </Route>
+
+            
+            <Route element={< EmployeeRoutes />}>
+                <Route path='/Profil' element={<Profil />} />
+            </Route>
+
+
+            <Route path='/' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+
+
+
+
+
+        </Routes>
+
 
     )
 }

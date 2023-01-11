@@ -1,7 +1,7 @@
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const cookie = require('cookie-parser')
+const ls = require('local-storage')
 const { verificationAccount } = require('../tools/nodemailer/verification-compte.js')
 const HandleError = require('../tools/Error-Handling')
 
@@ -18,13 +18,18 @@ function Login(req, res) {
                     res.json({ response: 'confirm your account' })
                 }
                 else {
+                    const r = e.role;
+                     const role = jwt.sign({r}, process.env.SECRET_WORD)
+                     ls('token',role)
+                     
 
-                    const data = e;
-                    const token = jwt.sign({ data }, process.env.SECRET_WORD)
-                    // const test = cookie('token', token)
+                    // const v = jwt.verify({r}, process.env.SECRET_WORD)
+                    // decoded_token = jwt.decode(e.token, verify = False)
                     res.json({
                         response: 'login sucess',
-                        token: token
+                        token: role,
+                        role : r,
+                        id : e._id
                     })
                 }
             }
@@ -51,20 +56,26 @@ function Register(req, res) {
 
     User.findOne({ email: body.email })
         .then((e) => {
+
             if (e) {
                 res.json({ response: 'email already exist' })
             }
             else {
+              
                 User.create({ ...body })
                     .then((e) => {
                         verificationAccount(e.email);
-                        res.json({ response:'creation sucessfully' })
+                        res.json({ response: 'creation sucessfully' })
                     })
                     .catch()
             }
         })
 }
-
+function decrybt (req,res){
+  const {token} = req.body;
+  const role =  jwt.verify(token,process.env.SECRET_WORD)
+  res.json({role:role.r});
+}
 
 function Confirmation(req, res) {
     const { token } = req.params
@@ -75,4 +86,4 @@ function Confirmation(req, res) {
             res.redirect('http://localhost:3000/')
         })
 }
-module.exports = { Login, Register, Confirmation }
+module.exports = { Login, Register, Confirmation,decrybt }

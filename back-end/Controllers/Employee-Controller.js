@@ -1,5 +1,7 @@
 const User = require('../models/user')
 const bcrypt = require('bcryptjs')
+const Formation = require('../models/formation')
+const Organisme = require('../models/organisme')
 
 
 // function AjouterEmpolyee(req, res) {
@@ -19,12 +21,12 @@ const bcrypt = require('bcryptjs')
 //         })
 // }
 
+
 function DisplayEmployee(req, res) {
-    User.find()
+    User.find({ role: 'employee' })
         .then((e) => { res.json(e) })
         .catch((error) => { res.send(error) })
 }
-
 
 
 function UpdateEmployee(req, res) {
@@ -43,4 +45,35 @@ function UpdateEmployee(req, res) {
 }
 
 
-module.exports = { DisplayEmployee,UpdateEmployee }
+const GetFormation = async (req, res) => {
+    const { id } = req.params;
+    await Formation.findById(id)
+        .then((e) => {
+            console.log(e)
+            res.json({data:e})
+        })
+
+}
+const GetOrganisme = async (req, res) => {
+    const { id } = req.params;
+    Organisme.findById(id)
+        .then((e) => { 
+            console.log(e)
+
+            res.json(e) 
+        })
+        .catch((error) => { res.json(error) })
+
+}
+async function getOneEmployee(req, res) {
+    const { id } = req.params;
+    await User.findById(id)
+        .then((e) => {
+
+            res.json({ data: e });
+        })
+}
+
+
+
+module.exports = { DisplayEmployee, UpdateEmployee, getOneEmployee, GetFormation,GetOrganisme }

@@ -72,14 +72,17 @@ function ListEmployee() {
                                 <td>
                                     <select class="form-select" name="organisme" aria-label="Default select example" onChange={(e) => { setChange({ ...infoEmployee, [e.target.name]: e.target.value }) }} >
                                         {organisme.map((o) => (
-                                            <option selected={e.organisme === o._id ? true : false} key={o._id} value={o._id}  >{o.label}</option>
+                                            <option selected={e.organisme == o._id ? true : false} key={o._id} value={o._id}  >{o.label}</option>
                                         ))}
                                     </select>
                                 </td>
                                 <td>
                                     <select class="form-select" name='formation' aria-label="Default select example" onChange={(e) => { setChange({ ...infoEmployee, [e.target.name]: e.target.value }) }} >
+                                  
+
                                         {formation.map((f) => (
-                                            <option selected={e.formation === f._id ? false : false} value={f._id} key={f._id}  >{f.label}  {e.formation} {f._id}</option>
+                                            <option selected={e.formation == f._id ? true : false} value={f._id} key={f._id}  >{f.label} </option>
+                                            
                                         ))}
                                     </select>
                                 </td>

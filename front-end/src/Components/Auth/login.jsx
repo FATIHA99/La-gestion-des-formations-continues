@@ -5,6 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import END_POINT from "../../config";
 import '../css/Login.css'
+import ls from 'local-storage'
+// import jwt from 'jwt-decode'
+// import user from "../../../../back-end/models/user";
 
 function Login() {
 
@@ -18,8 +21,19 @@ function Login() {
     e.preventDefault()
     axios.post(`${END_POINT}/auth/login`, userInfo)
       .then((e) => {
-        if (e.data.response == 'login sucess') {
-          navigate('/dashboard')
+        const tkn = e.data.token
+        if (e.data.response === 'login sucess') {
+          // console.log(e)
+           localStorage.setItem('token', tkn)
+  localStorage.setItem('id',e.data.id )
+          if (e.data.role === 'admin') {
+            navigate('/dashboard')
+          } else if (e.data.role === 'employee') {
+            navigate('/Profil')
+          }
+          else {
+            navigate('/notfound')
+          }
         }
         else {
           toast.warning(e.data.response)
@@ -33,7 +47,7 @@ function Login() {
 
   return (
     <div className="align">
-      <ToastContainer autoClose={200}/>
+      <ToastContainer autoClose={200} />
       {/* <h3 className="text-light ">Login Here</h3> */}
       <img className="logo-login" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjGk-jm8w8TnBmkvCuRyJSNYMk-Z9YYmMwQw&usqp=CAU'></img>
       <div className="grid">

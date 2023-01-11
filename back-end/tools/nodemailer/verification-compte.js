@@ -21,8 +21,8 @@ function verificationAccount(email) {
 
   let info = {
     from: '"Confirmation account " <fatihhaa27@gmail.com>',
-    to: email,   //
-    subject: "acount verification",
+    to: email,  
+    subject: "account verification",
     html: '<a  href="http://localhost:3001/auth/confirm/' + email_token + '">click here to verify </a>',
   };
 
