@@ -15,7 +15,7 @@ function Example(props) {
 
     const [oneOrganisme, setOrganisme] = useState({ label: '', compus: '' });
 
-    const getOne = async (e, id) => {
+    const getOne = async (e, id) => {    
         e.preventDefault()
         const One = await axios.get(`${END_POINT}/organisme/getone/${id}`)
         setOrganisme((One.data));

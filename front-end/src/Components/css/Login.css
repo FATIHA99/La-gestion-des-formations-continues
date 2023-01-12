@@ -67,7 +67,7 @@
     --bodyColor: var(--baseColor);
     --bodyFontFamily: "Open Sans";
     --bodyFontFamilyFallback: sans-serif;
-    --bodyFontSize: 0.875rem;
+    --bodyFontSize: 1rem;
     --bodyFontWeight: 400;
     --bodyLineHeight: 2.5;
    

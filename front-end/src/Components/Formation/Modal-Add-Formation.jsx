@@ -65,7 +65,7 @@ function Example() {
                                 as="textarea"
                                 rows={3} />
                         </Form.Group>
-                        <Form.Group className="mb-3 " controlId="exampleForm.ControlInput1">
+                        {/* <Form.Group className="mb-3 " controlId="exampleForm.ControlInput1">
                             <Form.Label className='text-light'>start date</Form.Label>
                             <Form.Control
                                 onChange={handleInput}
@@ -98,7 +98,7 @@ function Example() {
                                 autoFocus
                             />
 
-                        </Form.Group>
+                        </Form.Group> */}
                     </Form>
                 </Modal.Body>
                 <Modal.Footer className='bg-dark'>

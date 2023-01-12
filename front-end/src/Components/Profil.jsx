@@ -17,7 +17,7 @@ function Profil() {
         // e.preventDefault()
         const One = await axios.get(`${END_POINT}/employee/user/${id}`)
         setEmployee((One.data.data));
-        // console.log(One.data.data)
+        console.log(One.data.data)
 
     }
     const id = new ObjectId(localStorage.getItem('id'))
@@ -25,9 +25,10 @@ function Profil() {
 
     const getformation = async () => {
 
-        const i = employee.formation
-        console.log('formation id  ' + i)
-        const id = new ObjectId('63bae34d69adeb4799ac750c')
+        // const i = employee.formation
+
+        // console.log('formation id  ' + i)
+        const id = new ObjectId('63bae44697f46962c363d205')
         const formation = await axios.get(`${END_POINT}/employee/user/formation/${id}`)
         setFormation(formation.data.data);
 
@@ -35,11 +36,13 @@ function Profil() {
 
 
     const getorganisme = async () => {
-        const i = employee.organisme[0]
-        console.log('63bc9f74fbac1246ff3b6b6b    -'+ i)
+        const i = employee.organisme
+        const organismeString = [...i].join('');
+        // console.log(typeof organismeString)
+        // // console.log('63bc9f74fbac1246ff3b6b6b    -'+ i)
         const id_org = new ObjectId('63bc9f74fbac1246ff3b6b6b')
         const organisme = await axios.get(`${END_POINT}/employee/user/organisme/${id_org}`)
-        setOrganisme(organisme.data.label);
+        setOrganisme(organisme.data);
         console.log(organisme.data.label)
 
     }
@@ -76,7 +79,7 @@ function Profil() {
                                         <div className="posts">
                                             <div className="post_card" >
                                                 <div className="subject">  CURRENT FORMATION :<span className="text-danger">{form.label}</span></div>
-                                                <div className="subject">  ORGANISME : <span className="text-danger">{org}</span></div>
+                                                <div className="subject">  ORGANISME : <span className="text-danger">{org.label}</span></div>
                                                 <div className="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque incidunt officia numquam vel facilis?...</div>
 
                                             </div>

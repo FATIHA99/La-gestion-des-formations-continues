@@ -1,14 +1,33 @@
 import React from "react"
 import './css/Style-Dashboard.css'
-
+import { useEffect } from "react";
+import { useState } from "react";
+import END_POINT from "../config";
+import axios from 'axios'
+import { ObjectId } from 'bson';
 
 function Dashboard() {
+    const [employee, setEmployee] = useState([]);
 
+
+
+    const fetchEmployee = async (id) => {
+        // e.preventDefault()
+        const One = await axios.get(`${END_POINT}/employee/user/${id}`)
+        setEmployee((One.data.data));
+        console.log(One.data.data)
+
+    }
+    const id = new ObjectId(localStorage.getItem('id'))
+    useEffect(() => {
+        fetchEmployee(id)
+    
+    }, [])
     return (
         <div>
             <div className="Box-header">
                 <div className="Box-search">
-                    <svg className="icon-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+                    {/* <svg className="icon-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
                         <link xmlns type="text/css" rel="stylesheet" id="dark-mode-custom-link" />
                         <link xmlns type="text/css" rel="stylesheet" id="dark-mode-general-link" />
                         <style xmlns lang="en" type="text/css" id="dark-mode-custom-style" dangerouslySetInnerHTML={{ __html: "" }} />
@@ -18,8 +37,9 @@ function Dashboard() {
                             <path d="m0 0h32v32h-32z" />
                             <path d="m15 0c8.2842712 0 15 6.71572875 15 15 0 3.7823596-1.3999424 7.2377452-3.7099407 9.8762702l5.3667949 5.3663705-1.4142135 1.4142135-5.3663705-5.3667949c-2.638525 2.3099983-6.0939106 3.7099407-9.8762702 3.7099407-8.28427125 0-15-6.7157288-15-15 0-8.28427125 6.71572875-15 15-15zm0 2c-7.17970175 0-13 5.82029825-13 13 0 7.1797017 5.82029825 13 13 13 7.1797017 0 13-5.8202983 13-13 0-7.17970175-5.8202983-13-13-13z" fill="white" fillRule="nonzero" />
                         </g>
-                    </svg>
-                    <input className="input-search" placeholder="Search" type="text" />
+                    </svg> */}
+                    {/* <input className="input-search" placeholder="Search" type="text" /> */}
+                    <h4 className="m-3 text-light">{employee.email}</h4>
                 </div>
                 <div className="box-alert-infomation">
                     <div className="box-alert">
@@ -35,7 +55,7 @@ function Dashboard() {
                     </div>
                     <div className="box-infomation">
                         <img className="info-avatar" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" />
-                        <div className="info-name">Admin</div>
+                        <div className="info-name">{employee.username}</div>
                     </div>
                 </div>
             </div>
@@ -82,7 +102,7 @@ function Dashboard() {
                         <div className="box-trans-sub ">
                            <img src="https://mymodernmet.com/wp/wp-content/uploads/2021/01/morphy-me-celebrity-face-mashups-15.jpg" alt />
                             <div className="info-trans-sub ">
-                                <h5>Abelhafid belfaqir</h5>
+                                <h5>Abelhafid belfqir</h5>
                                 <div>Coach</div>
                             </div>
                           
