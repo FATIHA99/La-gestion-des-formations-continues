@@ -56,8 +56,8 @@ function Profil() {
     }, [])
 
     return (
-        <>
-            <div className="main">
+        <div >
+            <div >
                 <div className="phone">
 
                     <div className="phone_main">
@@ -91,8 +91,9 @@ function Profil() {
                     </div>
 
                 </div>
+                <h1>jjj</h1>
             </div>
-        </>
+        </div>
     )
 }
 export default Profil

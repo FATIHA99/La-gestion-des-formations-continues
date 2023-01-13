@@ -60,7 +60,7 @@ function Login() {
             </svg><span className="hidden">Email </span></label>
 
             {/* email */}
-            <input onChange={handleInput} autoComplete="username" id="login__username" type="email" name="email" className="form__input" placeholder="Username" required />
+            <input onChange={handleInput} autoComplete="username" id="login__username" type="email" name="email" className="form__input" placeholder="Email" required />
 
           </div>
           <div className="form__field">
